@@ -27,9 +27,6 @@ class Environ:
 
     def get_curr_state_and_legal_moves(self) -> Tuple[Dict[str, Union[int, str]], List[chess.Move]]:
         """
-        Get current state and legal moves in one call to avoid duplicate work.
-        This is the primary method for getting game state.
-        
         Returns:
             Tuple of (state_dict, legal_moves_list)
         """

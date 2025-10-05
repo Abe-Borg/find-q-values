@@ -18,8 +18,6 @@ class Agent:
         """
         Choose an action based on the current game data.
         
-        This is a simple replay agent that returns the move from the game data.
-        
         Args:
             game_moves: Dictionary containing moves for the current game
             curr_turn: Current turn identifier (e.g., 'W1', 'B1')
