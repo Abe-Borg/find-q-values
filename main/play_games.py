@@ -13,7 +13,7 @@ from tqdm import tqdm
 import argparse
 
 # Import the refactored game simulation module
-from training.game_simulation import play_games, warm_up_workers
+from game_simulation.game_simulation import play_games, warm_up_workers
 
 # Logger setup
 logger = logging.getLogger("play_games")

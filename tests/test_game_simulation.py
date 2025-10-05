@@ -6,7 +6,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from training.game_simulation import play_one_game
+from game_simulation.game_simulation import play_one_game
 from agents.Agent import Agent
 from environment.Environ import Environ
 
@@ -286,7 +286,7 @@ class TestGameSimulation:
     
     def test_play_games_empty_dataframe(self):
         """Test that empty DataFrame is handled gracefully."""
-        from training.game_simulation import play_games
+        from game_simulation.game_simulation import play_games
         
         empty_df = pd.DataFrame()
         corrupted = play_games(empty_df, pool=None)
@@ -295,7 +295,7 @@ class TestGameSimulation:
     
     def test_play_games_all_valid_games(self):
         """Test processing a DataFrame with only valid games."""
-        from training.game_simulation import play_games
+        from game_simulation.game_simulation import play_games
         
         # Create DataFrame with 3 valid games
         data = {
@@ -315,7 +315,7 @@ class TestGameSimulation:
     
     def test_play_games_all_corrupted_games(self):
         """Test processing a DataFrame where all games are corrupted."""
-        from training.game_simulation import play_games
+        from game_simulation.game_simulation import play_games
         
         # Create DataFrame with 3 corrupted games
         data = {
@@ -332,7 +332,7 @@ class TestGameSimulation:
     
     def test_play_games_mixed_valid_and_corrupted(self):
         """Test processing a DataFrame with mix of valid and corrupted games."""
-        from training.game_simulation import play_games
+        from game_simulation.game_simulation import play_games
         
         data = {
             'PlyCount': [4, 2, 4, 2],
@@ -350,7 +350,7 @@ class TestGameSimulation:
     
     def test_play_games_missing_plycount_column(self):
         """Test that missing PlyCount column returns all games as corrupted."""
-        from training.game_simulation import play_games
+        from game_simulation.game_simulation import play_games
         
         # DataFrame without PlyCount column
         data = {
@@ -606,7 +606,7 @@ class TestGameSimulation:
         White promotes by capture (bxa8=Q), then Black promotes with check (gxf1=Q+).
         Sequence is legal from the initial position.
         """
-        from training.game_simulation import play_one_game
+        from game_simulation.game_simulation import play_one_game
         w_agent, b_agent, environ = agents_and_environ
 
         moves = {
@@ -639,7 +639,7 @@ class TestGameSimulation:
         Classic en passant: 1.e4 d5 2.exd5 c5 3.dxc6 (e.p.)
         Note: SAN usually omits the 'e.p.' suffix; python-chess accepts 'dxc6'.
         """
-        from training.game_simulation import play_one_game
+        from game_simulation.game_simulation import play_one_game
         w_agent, b_agent, environ = agents_and_environ
 
         moves = {
@@ -667,7 +667,7 @@ class TestGameSimulation:
         White long castles after clearing b1/c1/d1 and avoiding attacked transit squares.
         Line: 1.d4 d5 2.Nc3 Nc6 3.Bf4 Bf5 4.Qd2 Qd7 5.O-O-O
         """
-        from training.game_simulation import play_one_game
+        from game_simulation.game_simulation import play_one_game
         w_agent, b_agent, environ = agents_and_environ
 
         moves = {
@@ -699,7 +699,7 @@ class TestGameSimulation:
         Case B: Data includes legal moves beyond PlyCount.
         Our loop stops at ply_count and treats the game as valid.
         """
-        from training.game_simulation import play_one_game
+        from game_simulation.game_simulation import play_one_game
         w_agent, b_agent, environ = agents_and_environ
 
         # Provide 4 legal plies but set PlyCount=2
