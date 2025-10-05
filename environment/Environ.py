@@ -65,16 +65,6 @@ class Environ:
         self.board.push(move)
         self.update_curr_state()
 
-    def push_uci_move(self, uci_move: str) -> None:
-        """
-        Push a move from UCI format (e.g. 'e2e4').
-        
-        Args:
-            uci_move: Move in UCI format
-        """
-        move = chess.Move.from_uci(uci_move)
-        self.push_move_object(move)
-
     def convert_san_to_move_object(self, san_move: str) -> chess.Move:
         """
         Convert SAN string to Move object for the current position.
@@ -90,3 +80,6 @@ class Environ:
         """
         return self.board.parse_san(san_move)
 
+    def load_chessboard_for_q_est(self, analysis_results) -> None:
+            move = analysis_results['anticipated_next_move']
+            self.board.push(move)
