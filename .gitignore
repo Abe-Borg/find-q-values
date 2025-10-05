@@ -1,0 +1,6 @@
+chess_data/
+venv/
+*.pyc
+src/__pycache__/ 
+*.ipynb
+temp/
