@@ -1,16 +1,23 @@
 # utils/game_settings.py
+import chess.engine
+import chess
 import pandas as pd
 from pathlib import Path
+from utils import constants
 
 base_directory = Path(__file__).parent
 
 pd.set_option('display.max_columns', None)
+
+time_limit = None
+search_limit = chess.engine.Limit(depth = constants.chess_engine_depth_limit, time = time_limit)
 
 helper_methods_logger_filepath = base_directory / ".." / "debug" / "helper_methods_logger_file.txt"
 agent_logger_filepath = base_directory / ".." / "debug" / "agent_logger_file.txt"
 environ_logger_filepath = base_directory / ".." / "debug" / "environ_logger_file.txt"
 game_simulation_logger_filepath = base_directory / ".." / "debug" / "game_simulation_logger_file.txt"
 play_games_logger_filepath = base_directory / ".." / "debug" / "play_games_logger_file.txt"
+generate_q_estimates_logger_filepath = base_directory / ".." / "debug" / "generate_q_estimates_logger_file.txt"
 
 chess_games_filepath_part_1 = base_directory / ".." / "chess_data" / "chess_games_part_1.pkl"
 chess_games_filepath_part_2 = base_directory / ".." / "chess_data" / "chess_games_part_2.pkl"
