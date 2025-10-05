@@ -6,8 +6,6 @@ base_directory = Path(__file__).parent
 
 pd.set_option('display.max_columns', None)
 
-PRINT_STEP_BY_STEP = False
-
 helper_methods_logger_filepath = base_directory / ".." / "debug" / "helper_methods_logger_file.txt"
 agent_logger_filepath = base_directory / ".." / "debug" / "agent_logger_file.txt"
 environ_logger_filepath = base_directory / ".." / "debug" / "environ_logger_file.txt"
