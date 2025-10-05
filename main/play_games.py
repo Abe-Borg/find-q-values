@@ -113,7 +113,8 @@ Examples:
 
 
 def main():
-    """Main function to process chess game files."""
+    """Main function to process chess game dataframes 
+    and make the corresponding estimated q values dataframes.."""
     start_time = time.time()
     
     # Parse command line arguments
@@ -123,7 +124,6 @@ def main():
     print(f"Processing dataframes {start_df} to {end_df} ({num_dataframes_to_process} total)")
     
     total_games_processed = 0
-    total_corrupted_games = 0
     
     # Create persistent process pool
     persistent_pool = create_persistent_pool()
@@ -144,28 +144,15 @@ def main():
                 print(f"\nPart {part}: Loaded {len(chess_data)} games")
                 
                 # Process games
-                corrupted_games = play_games(chess_data, persistent_pool)
+                # we will need to fill this in, not sure with what though.
                 
                 # Update statistics
                 total_games_processed += len(chess_data)
-                total_corrupted_games += len(corrupted_games)
                 
                 # Report results
                 part_elapsed = time.time() - part_start_time
-                print(f"Part {part}: {len(corrupted_games)} corrupted games "
-                      f"({len(corrupted_games)/len(chess_data)*100:.1f}%)")
                 print(f"Part {part}: Completed in {part_elapsed:.2f}s")
                 
-                # Remove corrupted games and save
-                if corrupted_games:
-                    chess_data = chess_data.drop(corrupted_games)
-                    chess_data.to_pickle(file_path, compression='zip')
-                    print(f"Part {part}: Removed corrupted games and saved")
-                
-            except FileNotFoundError:
-                print(f"\nPart {part}: File not found - {file_path}")
-                logger.critical(f"File not found: {file_path}")
-                continue
                 
             except Exception as e:
                 print(f"\nPart {part}: Error processing - {e}")
@@ -189,14 +176,11 @@ def main():
     print(f"Dataframe range: {start_df} to {end_df}")
     print(f"Total files processed: {num_dataframes_to_process}")
     print(f"Total games processed: {total_games_processed:,}")
-    print(f"Total corrupted games: {total_corrupted_games:,} "
-          f"({total_corrupted_games/total_games_processed*100:.2f}%)" if total_games_processed > 0 else "(N/A)")
     print(f"Total time: {total_time:.2f}s ({total_time/60:.1f} minutes)")
     print(f"Average time per file: {total_time/num_dataframes_to_process:.2f}s")
     
-    if total_games_processed > 0:
-        overall_games_per_sec = total_games_processed / total_time
-        print(f"Overall performance: {overall_games_per_sec:.0f} games/s")
+    overall_games_per_sec = total_games_processed / total_time
+    print(f"Overall performance: {overall_games_per_sec:.0f} games/s")
 
 
 if __name__ == '__main__':
