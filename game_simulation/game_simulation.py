@@ -251,8 +251,10 @@ def play_one_game(game_id: str,
         # Convert and validate move
         move_obj = environ.convert_san_to_move_object(chess_move_san)
 
-        # Apply move
+        # Apply move & andupdate current state
         environ.push_move_object(move_obj)
+
+        # in the rest of this function we find the estimated Q value for the moves in this one game.
     
     # not sure what to return, if anything.
 
