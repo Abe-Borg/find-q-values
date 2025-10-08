@@ -25,7 +25,7 @@ class AdaptiveChunker:
     """Creates balanced chunks of games for parallel processing."""
     
     def __init__(self):
-        self.calibrated_moves_per_second = 65000  # Based on your measured performance
+        self.calibrated_moves_per_second = 65000
     
     def create_balanced_chunks(self, 
                              game_indices: List[str], 

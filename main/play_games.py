@@ -12,7 +12,6 @@ import logging
 from tqdm import tqdm
 import argparse
 
-# Import the refactored game simulation module
 from game_simulation.game_simulation import play_games, warm_up_workers
 
 # Logger setup
@@ -113,11 +112,8 @@ Examples:
 
 
 def main():
-    """Main function to process chess game dataframes 
-    and make the corresponding estimated q values dataframes.."""
     start_time = time.time()
     
-    # Parse command line arguments
     start_df, end_df = parse_arguments()
     num_dataframes_to_process = end_df - start_df + 1
     
@@ -125,19 +121,15 @@ def main():
     
     total_games_processed = 0
     
-    # Create persistent process pool
     persistent_pool = create_persistent_pool()
     
     try:
-        # Process each data file
         for part in tqdm(range(start_df, end_df + 1), 
                         desc="Processing parts", unit="part"):
             
-            # Get file path
             file_path = getattr(game_settings, f'chess_games_filepath_part_{part}')
             
             try:
-                # Load data
                 part_start_time = time.time()
                 chess_data = pd.read_pickle(file_path, compression='zip')
                 
@@ -146,10 +138,7 @@ def main():
                 # Process games
                 # we will need to fill this in, not sure with what though.
                 
-                # Update statistics
                 total_games_processed += len(chess_data)
-                
-                # Report results
                 part_elapsed = time.time() - part_start_time
                 print(f"Part {part}: Completed in {part_elapsed:.2f}s")
                 
