@@ -1,3 +1,4 @@
+# project name: find-q-values
 # file: game_simulation/game_simulation.py
 
 from typing import List, Dict, Optional

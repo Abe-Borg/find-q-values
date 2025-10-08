@@ -1,3 +1,4 @@
+# project name: find-q-values
 # file: main/play_games.py
 
 import pandas as pd
